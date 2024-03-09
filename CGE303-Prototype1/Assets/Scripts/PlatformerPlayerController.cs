@@ -22,10 +22,13 @@ public class PlatformerPlayerController : MonoBehaviour
 
     public AudioSource playerAudio;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         playerAudio = GetComponent<AudioSource>();
 
@@ -40,7 +43,7 @@ public class PlatformerPlayerController : MonoBehaviour
     void Update()
     {
         //Get input values for horizontal movement
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
 
         //check for jump input
         if ( Input.GetButtonDown("Jump") && isGrounded)
@@ -50,6 +53,20 @@ public class PlatformerPlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
             playerAudio.PlayOneShot(jumpSound, 1.0f);
+
+            if (horizontalInput > 0f)
+            {
+                anim.SetBool("running", true);
+            }
+            else if (horizontalInput < 0f)
+            {
+                anim.SetBool("running", true);
+            }
+            else
+            {
+                anim.SetBool("running", false);
+            }
+
         }
     }
 
