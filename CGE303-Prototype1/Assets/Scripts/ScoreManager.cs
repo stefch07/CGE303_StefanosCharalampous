@@ -35,11 +35,11 @@ public class ScoreManager : MonoBehaviour
 
         if (!gameOver)
         {
-            textbox.text = "Score: " + score;
+            textbox.text = "Apples: " + score;
 
         }
 
-        if (score >= 10) 
+        if (score >= 16) 
         {
             won = true;
             gameOver = true;

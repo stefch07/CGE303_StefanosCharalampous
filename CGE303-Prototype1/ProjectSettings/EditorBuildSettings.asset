@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PlatformerPlayerStartingScene.unity
+    guid: c171d25b482e348f58e4762f9cd99da4
+  - enabled: 1
+    path: Assets/Scenes/Platformer Start.unity
+    guid: 3f111bc20238049389afa7fe2ba52044
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TankMazeLevel.unity
     guid: 6e30076bac7c24fc5b65777da23b56b9
   m_configObjects: {}
