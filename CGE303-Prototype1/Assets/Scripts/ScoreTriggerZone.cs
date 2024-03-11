@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreTriggerZone : MonoBehaviour
+public class WinZone : MonoBehaviour
 {
     //create a variable to keep track of
     //whether th trigger zone is active
