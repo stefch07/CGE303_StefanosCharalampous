@@ -7,6 +7,7 @@ TagManager:
   - Walls
   - Apple
   - Trap
+  - GM
   layers:
   - Default
   - TransparentFX

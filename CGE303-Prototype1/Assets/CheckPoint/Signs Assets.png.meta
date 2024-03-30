@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 11594f249891640dab7d399457e87699
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -16565130855152450
+    second: Signs Assets_0
+  - first:
+      213: -8904741924219668984
+    second: Signs Assets_1
+  - first:
+      213: -2829528352462047688
+    second: Signs Assets_2
+  - first:
+      213: -5006247835759400473
+    second: Signs Assets_3
+  - first:
+      213: 3757082657798991150
+    second: Signs Assets_4
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -41,7 +56,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -102,7 +117,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Signs Assets_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 4188
+        width: 830
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb488bbe91625cff0800000000000000
+      internalID: -16565130855152450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs Assets_1
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 4032
+        width: 738
+        height: 920
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 806bb5636600c6480800000000000000
+      internalID: -8904741924219668984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs Assets_2
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 4061
+        width: 723
+        height: 891
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8367a9574fe7bb8d0800000000000000
+      internalID: -2829528352462047688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs Assets_3
+      rect:
+        serializedVersion: 2
+        x: 2797
+        y: 4027
+        width: 940
+        height: 925
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e92efb1e1c368ab0800000000000000
+      internalID: -5006247835759400473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs Assets_4
+      rect:
+        serializedVersion: 2
+        x: 3898
+        y: 4025
+        width: 940
+        height: 927
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2da3e975c6d32430800000000000000
+      internalID: 3757082657798991150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
