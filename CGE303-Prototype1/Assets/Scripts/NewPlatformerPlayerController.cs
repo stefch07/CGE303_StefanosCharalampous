@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlatformerPlayerController : MonoBehaviour
+public class NewPlatformerPlayerController : MonoBehaviour
 {
 
     public float moveSpeed = 5f;
@@ -46,7 +46,7 @@ public class PlatformerPlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         //check for jump input
-        if ( Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
 
             //Apply an upward force for jumping
@@ -82,16 +82,16 @@ public class PlatformerPlayerController : MonoBehaviour
         if (horizontalInput > 0)
         {
             //transform.localScale = new Vector3(1f, 1f, 1f);
-            transform.localScale = Quaternion.Euler(0, 0, 0);
+            //transform.localScale = Quaternion.Euler(0, 0, 0);
 
         }
 
         else if (horizontalInput < 0)
         {
             //transform.localScale = new Vector3(-1f, 1f, 1f);
-            transform.localScale = Quaternion.Euler(0, 180, 0);
+           // transform.localScale = Quaternion.Euler(0, 180, 0);
         }
-       
+
     }
 
 }
