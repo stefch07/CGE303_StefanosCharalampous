@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class NewPlatformerPlayerController : MonoBehaviour
 {
-
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
 
@@ -22,19 +21,15 @@ public class NewPlatformerPlayerController : MonoBehaviour
 
     public AudioSource playerAudio;
 
-    //private Animator anim;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
 
         playerAudio = GetComponent<AudioSource>();
 
         if (groundCheck == null)
         {
-
             Debug.LogError("Groundcheck is not assigned to player controller!");
         }
     }
@@ -48,25 +43,10 @@ public class NewPlatformerPlayerController : MonoBehaviour
         //check for jump input
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-
             //Apply an upward force for jumping
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
             playerAudio.PlayOneShot(jumpSound, 1.0f);
-
-            /*if (horizontalInput > 0f)
-            {
-                anim.SetBool("running", true);
-            }
-            else if (horizontalInput < 0f)
-            {
-                anim.SetBool("running", true);
-            }
-            else
-            {
-                anim.SetBool("running", false);
-            }
-            */
         }
     }
 
@@ -78,20 +58,15 @@ public class NewPlatformerPlayerController : MonoBehaviour
         // check if the player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-
         if (horizontalInput > 0)
         {
             //transform.localScale = new Vector3(1f, 1f, 1f);
-            //transform.localScale = Quaternion.Euler(0, 0, 0);
-
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
         else if (horizontalInput < 0)
         {
             //transform.localScale = new Vector3(-1f, 1f, 1f);
-           // transform.localScale = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-
     }
-
 }

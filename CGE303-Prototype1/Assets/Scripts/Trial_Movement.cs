@@ -86,7 +86,25 @@ public class Trial_Movement : MonoBehaviour
        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpGround);
     }
 
+    void FixedUpdate()
+    {
+        //move the player using rigidbody2d in FixedUpdate
+        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
 
+        // check if the player is grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (horizontalInput > 0)
+        {
+            //transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (horizontalInput < 0)
+        {
+            //transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
 
 
 
