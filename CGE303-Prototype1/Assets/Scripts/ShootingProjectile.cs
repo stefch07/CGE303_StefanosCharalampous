@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShootingProjectile : MonoBehaviour
 {
     public GameObject Projectile;
-
     public Transform firePoint;
 
     // Update is called once per frame
@@ -19,7 +18,13 @@ public class ShootingProjectile : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(Projectile, firePoint.position, firePoint.rotation);
-    }
+        if (Projectile == null)
+        {
+            Debug.LogError("Projectile prefab is not assigned!");
+            return;
+        }
 
+        GameObject fireProjectile = Instantiate(Projectile, firePoint.position, firePoint.rotation);
+        Destroy(fireProjectile, 3f);
+    }
 }
