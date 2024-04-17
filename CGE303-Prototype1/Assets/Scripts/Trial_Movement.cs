@@ -12,8 +12,8 @@ public class Trial_Movement : MonoBehaviour
 
     [SerializeField] private LayerMask jumpGround;
     private float dirX = 0f;
-    [SerializeField]private float moveSpeed = 7f;
-    [SerializeField]private float jumpForce = 14f;
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float jumpForce = 14f;
 
     private enum MovementState { idle, running, jumping, falling }
 
@@ -38,7 +38,7 @@ public class Trial_Movement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             jumpSoundEffect.Play();
-          rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
         UpdateAnimationState();
@@ -83,10 +83,10 @@ public class Trial_Movement : MonoBehaviour
 
     private bool isGrounded()
     {
-       return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpGround);
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpGround);
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         //move the player using rigidbody2d in FixedUpdate
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
@@ -106,6 +106,6 @@ public class Trial_Movement : MonoBehaviour
         }
     }
 
-
+    */
 
 }
