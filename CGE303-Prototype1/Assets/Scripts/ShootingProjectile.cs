@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingProjectile : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    public GameObject Projectile;
 
     public Transform firePoint;
 
@@ -19,9 +19,7 @@ public class ShootingProjectile : MonoBehaviour
 
     void Shoot()
     {
-        GameObject fireProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-        Destroy(fireProjectile, 3f);
+        Instantiate(Projectile, firePoint.position, firePoint.rotation);
     }
 
 }

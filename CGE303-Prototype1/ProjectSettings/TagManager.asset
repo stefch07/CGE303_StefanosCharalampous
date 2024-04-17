@@ -8,6 +8,7 @@ TagManager:
   - Apple
   - Trap
   - GM
+  - Enemy
   layers:
   - Default
   - TransparentFX
