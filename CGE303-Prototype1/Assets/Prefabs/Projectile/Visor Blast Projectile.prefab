@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 958799447794487770}
   - component: {fileID: 958799447794487771}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Visor Blast Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
