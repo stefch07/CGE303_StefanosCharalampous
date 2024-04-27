@@ -11,12 +11,18 @@ private Rigidbody2D rb;
 public float knockBackForce = 5f;
 public GameObject playerDeathEffect;
 static bool hitRecently = false;
+
 public float hitRecoveryTime = 0.2f;
+private AudioSource playerAudio;
+public AudioClip playerHitSound;
+private Animator animator;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+        animator = GetComponent<Animator>();
 
      rb = GetComponent<Rigidbody2D>();
 
@@ -52,6 +58,7 @@ public float hitRecoveryTime = 0.2f;
     {
         yield return new WaitForSeconds(hitRecoveryTime);
         hitRecently = false;
+        animator.SetBool("hit", false);
     }
 
 
@@ -64,6 +71,10 @@ public float hitRecoveryTime = 0.2f;
 if (health <= 0)
 {
     Die();
+}
+else{
+    playerAudio.PlayOneShot(playerHitSound, 1.0f);
+    animator.SetBool("hit", true);
 }
 
     }
