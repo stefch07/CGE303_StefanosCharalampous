@@ -2,108 +2,92 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class platofrmerMovement : MonoBehaviour
+public class PlatformerPlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private SpriteRenderer sprite;
-    private Animator anim;
-    private BoxCollider2D coll;
-
-    public float moveSpeed = 7f;
-    public float jumpForce = 14f;
-
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
+    
     public LayerMask groundLayer;
     public Transform groundCheck;
-    public float groundCheckRadius = 0.1f;
+    public float groundCheckRadius = 0.2f;
     private bool isGrounded;
-
-    private AudioSource jumpSoundEffect;
+    
+    private Rigidbody2D rb;
     private float horizontalInput;
-
+    
+    public AudioClip jumpSound;
+    
+    private AudioSource playerAudio;
+    
+    public AudioSource audioPlayer;
+    
+    private Animator animator;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        coll = GetComponent<BoxCollider2D>();
-        jumpSoundEffect = GetComponent<AudioSource>();
-
+        
+        // Set reference variables to components
+        playerAudio = GetComponent<AudioSource>();
+        
+        animator = GetComponent<Animator>();
+        
         if (groundCheck == null)
         {
-            Debug.LogError("Groundcheck is not assigned to player controller!");
+            Debug.LogError("GroundCheck not assigned to the player controller!");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-
+        // Get input values for horizontal movement
+        horizontalInput = Input.GetAxis("Horizontal");
+        
+        // Check for jump input
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            jumpSoundEffect.Play();
+            // Apply an upward force for jumping
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            
+            // Play jump sound effect
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
-
-        UpdateAnimationState();
     }
-
-    private void UpdateAnimationState()
-    {
-        MovementState state;
-
-        if (Mathf.Abs(horizontalInput) > 0f)
-        {
-            state = MovementState.running;
-            sprite.flipX = horizontalInput < 0f;
-        }
-        else
-        {
-            state = MovementState.idle;
-        }
-
-        if (!isGrounded)
-        {
-            state = rb.velocity.y > 0.1f ? MovementState.jumping : MovementState.falling;
-        }
-
-        anim.SetInteger("state", (int)state);
-    }
-
+    
     void FixedUpdate()
-{
-    if (!PlayerHealth.hitRecently)
     {
-        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        if (!PlayerHealth.hitRecently) {
+            // Move the player using Rigidbody2D in FixedUpdate
+            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        }
+        
+        animator.SetFloat("xVelocityAbs", Mathf.Abs(rb.velocity.x));
+        
+        animator.SetFloat("yVelocityAbs", rb.velocity.y);
+        
+        // Check if the player is grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        // Set animator parameter onGround to isGrounded
+        animator.SetBool("onGround", isGrounded);
+        
+        if (horizontalInput > 0)
+        {
+            // set the rotation of the player to face right
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (horizontalInput < 0)
+        {
+            // set the rotation of the player to face left
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
-
-    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-    // Check if the player is grounded
-    if (isGrounded)
-    {
-        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+    
+    public void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "CollisionTag") {
+            audioPlayer.Play();
+        }
     }
-
-    if (horizontalInput > 0)
-    {
-        transform.localScale = new Vector3(1f, 1f, 1f);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-    else if (horizontalInput < 0)
-    {
-        transform.localScale = new Vector3(-1f, 1f, 1f);
-        transform.rotation = Quaternion.Euler(0, 180, 0);
-    }
-}
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-    }
-
-    private enum MovementState { idle, running, jumping, falling }
 }

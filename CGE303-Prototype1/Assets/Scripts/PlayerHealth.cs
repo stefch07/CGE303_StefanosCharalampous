@@ -11,7 +11,7 @@ public DisplayBar healthBar;
 private Rigidbody2D rb;
 public float knockBackForce = 5f;
 public GameObject playerDeathEffect;
-static bool hitRecently = false;
+public static bool hitRecently = false;
 public float hitRecoveryTime = 0.2f;
 private AudioSource playerAudio;
 public AudioClip playerHitSound;
