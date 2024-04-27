@@ -72,31 +72,32 @@ public class platofrmerMovement : MonoBehaviour
         anim.SetInteger("state", (int)state);
     }
 
-     void FixedUpdate()
-    {
-        if (!PlayerHealth.hitRecently)
+    void FixedUpdate()
 {
-    rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-}
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
+    if (!PlayerHealth.hitRecently)
+    {
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-
-        // check if the player is grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        if (horizontalInput > 0)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (horizontalInput < 0)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
     }
+
+    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+    // Check if the player is grounded
+    if (isGrounded)
+    {
+        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+    }
+
+    if (horizontalInput > 0)
+    {
+        transform.localScale = new Vector3(1f, 1f, 1f);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+    else if (horizontalInput < 0)
+    {
+        transform.localScale = new Vector3(-1f, 1f, 1f);
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+}
 
     private void OnDrawGizmos()
     {
