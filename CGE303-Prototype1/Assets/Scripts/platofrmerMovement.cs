@@ -72,8 +72,13 @@ public class platofrmerMovement : MonoBehaviour
         anim.SetInteger("state", (int)state);
     }
 
-    private void FixedUpdate()
+     void FixedUpdate()
     {
+        if (!PlayerHealth.hitRecently)
+{
+    rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+}
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);

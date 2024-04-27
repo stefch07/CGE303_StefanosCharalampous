@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -11,7 +12,6 @@ private Rigidbody2D rb;
 public float knockBackForce = 5f;
 public GameObject playerDeathEffect;
 static bool hitRecently = false;
-
 public float hitRecoveryTime = 0.2f;
 private AudioSource playerAudio;
 public AudioClip playerHitSound;
@@ -35,10 +35,29 @@ private Animator animator;
      healthBar.SetMaxValue(health);
 
      hitRecently = false;
+     
 
     }
 
-    public void KnockBack(Vector3 enemyPosition)
+     /*public void KnockBack(Vector3 enemyPosition){
+        if (hitRecently){
+            return;
+        }
+        hitRecently = true;
+
+        StartCoroutine(RecoverFromHit());
+            Vector2 direction = transform.position - enemyPosition;
+        
+        direction.Normalize();
+
+        direction.y = direction.y * 0.5f+ 0.5f;
+
+        rb.AddForce(direction * knockBackForce, ForceMode2D.Impulse);
+     }*/
+
+
+
+    public void Knockback(Vector3 enemyPosition)
     {
 
         if (hitRecently){
@@ -82,7 +101,7 @@ else{
     public void Die()
     {
         ScoreManager.gameOver = true;
-
+        gameObject.SetActive(false);
     }
     
 
