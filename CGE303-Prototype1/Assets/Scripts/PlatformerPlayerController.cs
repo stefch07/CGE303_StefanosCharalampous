@@ -21,12 +21,18 @@ public class PlatformerPlayerController : MonoBehaviour
 
     public AudioSource playerAudio;
 
+    public AudioSource audioPlayer;
+
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
         playerAudio = GetComponent<AudioSource>();
+
+        animator = GetComponent<Animator>();
 
         if (groundCheck == null)
         {
@@ -52,9 +58,13 @@ public class PlatformerPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(!PlayerHealth.hitRecently){
+            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        }
         //move the player using rigidbody2d in FixedUpdate
-        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-
+        animator.SetFloat("xVelocityAbs", Mathf.Abs(rb.velocity.x));
+        
+        animator.SetFloat("yVelocityAbs", rb.velocity.y);
         // check if the player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -67,6 +77,13 @@ public class PlatformerPlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
             transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+    // OnCollisionEnter2D method should be defined at the class level
+    public void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "CollisionTag") {
+            audioPlayer.Play();
         }
     }
 }
