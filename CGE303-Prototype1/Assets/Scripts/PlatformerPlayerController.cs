@@ -68,6 +68,8 @@ public class PlatformerPlayerController : MonoBehaviour
         // check if the player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        animator.SetBool("onGround", isGrounded);
+
         if (horizontalInput > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);

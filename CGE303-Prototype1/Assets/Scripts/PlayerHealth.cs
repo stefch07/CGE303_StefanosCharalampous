@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 
+
+
 public int health = 100;
 public DisplayBar healthBar;
 private Rigidbody2D rb;
@@ -22,6 +24,8 @@ private Animator animator;
     void Start()
     {
 
+        playerAudio = GetComponent<AudioSource>();
+
         animator = GetComponent<Animator>();
 
      rb = GetComponent<Rigidbody2D>();
@@ -35,11 +39,10 @@ private Animator animator;
      healthBar.SetMaxValue(health);
 
      hitRecently = false;
-     
 
     }
 
-     /*public void KnockBack(Vector3 enemyPosition){
+     public void KnockBack(Vector3 enemyPosition){
         if (hitRecently){
             return;
         }
@@ -53,25 +56,8 @@ private Animator animator;
         direction.y = direction.y * 0.5f+ 0.5f;
 
         rb.AddForce(direction * knockBackForce, ForceMode2D.Impulse);
-     }*/
+     }
 
-
-
-    public void Knockback(Vector3 enemyPosition)
-    {
-
-        if (hitRecently){
-            return;
-        }
-       hitRecently = true;
-
-       StartCoroutine(RecoverFromHit());
-
-       Vector2 direction = transform.position - enemyPosition;
-       direction.Normalize();
-       direction.y = direction.y * 0.5f + 0.5f;
-       rb.AddForce(direction * knockBackForce, ForceMode2D.Impulse);
-    }
 
     IEnumerator RecoverFromHit()
     {
@@ -101,7 +87,10 @@ else{
     public void Die()
     {
         ScoreManager.gameOver = true;
+        GameObject deathEffect = Instantiate(playerDeathEffect, transform.position, Quaternion.identity);
+        Destroy(deathEffect, 2f);
         gameObject.SetActive(false);
+        //playerAudio.PlayOneShot(playerDeathSound);
     }
     
 

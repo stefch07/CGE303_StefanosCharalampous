@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
             }
             playerHealth.TakeDamage(damage);
 
-            playerHealth.Knockback(transform.position);
+            playerHealth.KnockBack(transform.position);
         }   
 
         
