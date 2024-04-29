@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 
-
-
 public int health = 100;
 public DisplayBar healthBar;
 private Rigidbody2D rb;
@@ -39,6 +37,11 @@ private Animator animator;
      healthBar.SetMaxValue(health);
 
      hitRecently = false;
+     
+     if (gameObject.activeSelf) {
+            // start a coroutine to recover from being hit
+            StartCoroutine(RecoverFromHit());
+        }
 
     }
 

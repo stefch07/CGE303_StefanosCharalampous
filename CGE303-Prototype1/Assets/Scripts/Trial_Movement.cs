@@ -54,13 +54,13 @@ public class Trial_Movement : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.running;
-            sprite.flipX = false;
+            //sprite.flipX = false;
         }
 
         else if (dirX < 0f)
         {
             state = MovementState.running;
-            sprite.flipX = true;
+            //sprite.flipX = true;
         }
 
         else

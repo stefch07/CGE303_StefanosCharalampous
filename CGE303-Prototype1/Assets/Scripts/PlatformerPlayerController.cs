@@ -14,7 +14,7 @@ public class PlatformerPlayerController : MonoBehaviour
     public bool isGrounded;
 
     private Rigidbody2D rb;
-    private float horizontalInput;
+    public float horizontalInput;
 
     //Audio clip
     public AudioClip jumpSound;
@@ -72,12 +72,12 @@ public class PlatformerPlayerController : MonoBehaviour
 
         if (horizontalInput > 0)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            //transform.localScale = new Vector3(1f, 1f, 1f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (horizontalInput < 0)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            //transform.localScale = new Vector3(-1f, 1f, 1f);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
