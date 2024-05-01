@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PlatformerPlayerStartingScene.unity
     guid: c171d25b482e348f58e4762f9cd99da4
   - enabled: 1
+    path: Assets/Scenes/ShootingPlatformerStart.unity
+    guid: 9336ab966c6494d9d941fb09f02a1637
+  - enabled: 0
     path: Assets/Scenes/Platformer Start.unity
     guid: 3f111bc20238049389afa7fe2ba52044
   - enabled: 0

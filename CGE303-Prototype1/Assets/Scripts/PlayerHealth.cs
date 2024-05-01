@@ -15,6 +15,7 @@ public static bool hitRecently = false;
 public float hitRecoveryTime = 0.2f;
 private AudioSource playerAudio;
 public AudioClip playerHitSound;
+public AudioClip playerDeathSound;
 private Animator animator;
 
 
@@ -93,7 +94,7 @@ else{
         GameObject deathEffect = Instantiate(playerDeathEffect, transform.position, Quaternion.identity);
         Destroy(deathEffect, 2f);
         gameObject.SetActive(false);
-        //playerAudio.PlayOneShot(playerDeathSound);
+        playerAudio.PlayOneShot(playerDeathSound);
     }
     
 
