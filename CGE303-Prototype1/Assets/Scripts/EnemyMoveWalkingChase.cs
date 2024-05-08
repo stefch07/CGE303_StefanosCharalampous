@@ -12,18 +12,29 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerTransform == null)
+        {
+            return; // Player not found, do nothing
+        }
+
         Vector2 playerDirection = playerTransform.position - transform.position;
         float distanceToPlayer = playerDirection.magnitude;
 
@@ -40,7 +51,12 @@ public class EnemyMoveWalkingChase : MonoBehaviour
             else
             {
                 StopMoving();
+                Debug.Log("No Ground Ahead");
             }
+        }
+        else
+        {
+            StopMoving();
         }
     }
 
@@ -48,7 +64,7 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     {
         float groundCheckDistance = 2.0f;
         LayerMask groundLayer = LayerMask.GetMask("Ground");
-        Vector2 enemyFacingDirection = (transform.rotation.y == 0) ? Vector2.left : Vector2.right;
+        Vector2 enemyFacingDirection = (transform.localScale.x > 0) ? Vector2.left : Vector2.right;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down + enemyFacingDirection, groundCheckDistance, groundLayer);
         return hit.collider != null;
     }
@@ -57,11 +73,11 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     {
         if (playerDirection.x < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            sr.flipX = false;
         }
-        else
+        else if (playerDirection.x > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            sr.flipX = true;
         }
     }
 
