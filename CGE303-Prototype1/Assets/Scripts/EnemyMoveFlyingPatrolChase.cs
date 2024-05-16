@@ -7,7 +7,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
     // an array of waypoints the enemy will move between
     public GameObject[] patrolPoints;
     
-    // current patrol point index
+    // Current patrol point index
     private int currentPatrolPointIndex = 0;
     
     // public variables for movement
@@ -33,6 +33,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
     // SpriteRenderer component for the enemy
     private SpriteRenderer sr;
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +47,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         
         // check if the patrolPoints array is empty
-        if (patrolPoints == null || patrolPoints.Length < 1) {
+        if (patrolPoints == null || patrolPoints.Length == 0) {
             // if it is, log an error message
             Debug.LogError("No patrol points assigned!");
         }
@@ -99,7 +100,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
     
     void Patrol() {
         // Check if reached current target
-        if ((Vector2.Distance(transform.position, target.transform.position)) <= 0.5) {
+        if (Vector2.Distance(transform.position, target.transform.position) <= 0.5f) {
             // Update target to the next patrol point (wrap around)
             currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
         }
@@ -117,7 +118,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
     
     void MoveTowardTarget() {
         // calculate direction toward target
-        Vector2 direction = target.transform.position - player.transform.position;
+        Vector2 direction = target.transform.position - transform.position;
         
         // Normalize direction
         direction.Normalize();
@@ -133,7 +134,7 @@ public class EnemyMoveFlyingPatrolChase : MonoBehaviour
         if (direction.x < 0) {
             sr.flipX = false;
         }
-        else if (direction.x < 0) {
+        else if (direction.x > 0) {
             sr.flipX = true;
         }
     }

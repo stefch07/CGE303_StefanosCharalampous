@@ -35,7 +35,7 @@ public class EnemyMoveWalkingChase : MonoBehaviour
         // setting up the references
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindWithTag("Player").transform;
         
         sr = GetComponent<SpriteRenderer>();
     }
@@ -90,10 +90,13 @@ public class EnemyMoveWalkingChase : MonoBehaviour
         LayerMask groundLayer = LayerMask.GetMask("Ground");
         
         // determine which direction the enemy is facing
-        Vector2 enemyFacingDirection = (transform.rotation.y == 0) ? Vector2.left : Vector2.right;
+        Vector2 enemyFacingDirection = (sr.flipX == false) ? Vector2.left : Vector2.right;
         
         // Raycast to check for ground ahead of the enemy
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down + enemyFacingDirection, groundCheckDistance, groundLayer);
+        
+        // draw a line to visualize the raycast
+        Debug.DrawRay(transform.position, Vector2.down + enemyFacingDirection, Color.red);
         
         // Return true if ground is detected
         return hit.collider != null;
@@ -122,6 +125,10 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     }
     
     private void StopMoving() {
+        // Stop moving if the player is out of range
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        
+        // set the animator parameter to stop moving
         anim.SetBool("isMoving", false);
     }
 }
