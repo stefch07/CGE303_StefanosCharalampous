@@ -18,7 +18,7 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     // private references
     
     // Transform of the player
-    private Transform playerTransform;
+    public Transform playerTransform;
     
     // Rigidbody2D of the enemy
     private Rigidbody2D rb;
@@ -67,8 +67,9 @@ public class EnemyMoveWalkingChase : MonoBehaviour
             // if there is ground ahead of the enemy
             if (IsGroundAhead()) {
                 MoveTowardPlayer(playerDirection);
+                Debug.Log("Move towards player");
+
             }
-            // if there is no ground ahead of the enemy, stop moving
             else {
                 StopMoving();
                 Debug.Log("No ground ahead");
@@ -77,6 +78,8 @@ public class EnemyMoveWalkingChase : MonoBehaviour
         else {
             // stop moving if the player is not within the chase range
             StopMoving();
+            Debug.Log("Player not within chase range");
+
         }
     }
     
@@ -84,20 +87,21 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     bool IsGroundAhead () {
         // ground check variables
         // Distance to check for ground
-        float groundCheckDistance = 2.0f;
+        float groundCheckDistance = 5.0f;
         
         // LayerMask for the ground
         LayerMask groundLayer = LayerMask.GetMask("Ground");
         
         // determine which direction the enemy is facing
         Vector2 enemyFacingDirection = (sr.flipX == false) ? Vector2.left : Vector2.right;
+        Debug.Log("Enemy facing direction: "+ enemyFacingDirection.x);
         
         // Raycast to check for ground ahead of the enemy
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down + enemyFacingDirection, groundCheckDistance, groundLayer);
         
         // draw a line to visualize the raycast
         Debug.DrawRay(transform.position, Vector2.down + enemyFacingDirection, Color.red);
-        
+        Debug.Log("is ground ahead: " + (hit.collider != null));
         // Return true if ground is detected
         return hit.collider != null;
     }
@@ -118,10 +122,12 @@ public class EnemyMoveWalkingChase : MonoBehaviour
     }
     
     private void MoveTowardPlayer(Vector2 playerDirection) {
+        Debug.Log("Move towards player start");
         // move the enemy toward the player
         rb.velocity = new Vector2(playerDirection.x * enemyMovementSpeed, rb.velocity.y);
         // set the animator to move
         anim.SetBool("isMoving", true);
+        Debug.Log("playerDirection.x: " + playerDirection.x);
     }
     
     private void StopMoving() {
@@ -130,5 +136,6 @@ public class EnemyMoveWalkingChase : MonoBehaviour
         
         // set the animator parameter to stop moving
         anim.SetBool("isMoving", false);
+        Debug.Log("stop moving finish");
     }
 }
